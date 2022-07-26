@@ -1,0 +1,27 @@
+$start-color: #4db1fd;
+$end-color: #128afb;
+$start-color-hover: #4db1fd;
+$end-color-hover: #128afb;
+$hover: rgba(255, 255, 255, 0.5);
+$action-color: linear-gradient(180deg, $start-color 0%, $end-color 100%);
+$action-color-hover: linear-gradient(
+                180deg,
+                $end-color-hover 0%,
+                $start-color-hover 100%
+);
+$brand-blue-50: #F2FAFE;
+$brand-blue-500: #128afb;
+$brand-blue-700: #1070c9;
+
+$brand-white-100: #fafbfc;
+$brand-white-200: #F0F4F8;
+
+$brand-grey-100: #F0F4F8;
+$brand-grey-300: #c0d0df;
+$brand-grey-400: #99acbc;
+$brand-grey-500: #7B8B99;
+$brand-grey-600: #596168;
+
+$brand-gold: #FFE091;
+
+$green-700: #10C929;

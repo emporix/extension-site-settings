@@ -1,0 +1,53 @@
+@import "./_variables.scss";
+@import "./base.scss";
+@import "./_primereact.scss";
+
+
+#app {
+  font-weight: normal;
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: $brand-grey-600;
+  transition: 0.4s;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: $brand-blue-50
+  }
+}
+
+
+.module {
+  //@include styleclass('grid m-0 overflow-y-scroll w-full align-items-center');
+  background-color: #fafbfc;
+  padding: 40px;
+  height: 100%;
+  overflow: auto;
+
+  .module-title {
+    //@include styleclass('my-2');
+    font-weight: 700;
+    font-size: 2rem;
+    color: #131414;
+  }
+
+  .module-subtitle {
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+  }
+
+  .highlight-text {
+    color: $brand-blue-500;
+  }
+
+  .section-title {
+    color: $brand-grey-600;
+    font-size: 20px;
+    line-height: 24px;
+  }
+}

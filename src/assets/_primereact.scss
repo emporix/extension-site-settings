@@ -1,0 +1,389 @@
+body {
+  .p-button {
+    background: $action-color;
+    border: 1px solid $brand-blue-500;
+    align-items: center;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 2px;
+    font-family: 'Lato', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #ffffff;
+    padding: 8px 24px;
+    cursor: pointer;
+
+    &.p-button-text {
+      color: var(--icon-color);
+      background: transparent;
+
+      &.p-button-icon-only {
+        background: transparent;
+        box-shadow: none;
+        border: 1px solid transparent;
+        padding: 6px 0;
+        width: 2.125rem;
+      }
+      &.p-button-icon-only:enabled:hover {
+        color: $brand-blue-500;
+      }
+      &.p-button-icon-only:disabled {
+        color: $brand-grey-300;
+      }
+      &.p-button-icon-only:enabled:active {
+        color: $brand-blue-700;
+      }
+    }
+
+    &:enabled:hover,
+    &:hover {
+      background: $action-color-hover;
+      border: 1px solid $brand-blue-700;
+    }
+
+    &:disabled {
+      color: #c0d0df;
+      background: linear-gradient(180deg, #ffffff 0%, $brand-white-100 100%);
+    }
+
+    &.p-button-secondary {
+      box-shadow: none;
+      color: $brand-grey-600;
+      background: linear-gradient(180deg, #ffffff 0%, $brand-white-100 100%);
+      border: 1px solid $brand-grey-400;
+
+      &.p-button-icon-only {
+        padding: 6px 0;
+        width: 2.125rem;
+      }
+
+      &:hover,
+      &:hover:enabled {
+        box-shadow: none;
+        background: linear-gradient(180deg, #ffffff 0%, $brand-white-200 100%);
+        border: 1px solid $brand-grey-600;
+        color: $brand-grey-600;
+      }
+    }
+  }
+
+  .p-dropdown {
+    border-radius: 2px;
+    border-color: $brand-grey-300;
+  }
+
+  .p-dropdown-panel .p-dropdown-items {
+    padding: 0 !important;
+
+    .p-dropdown-item {
+      color: black !important;
+      padding: 4px 8px !important;
+    }
+
+    .p-dropdown-item.p-highlight {
+      background: var(--primary-color) !important;
+      color: #fff !important;
+    }
+  }
+
+  .p-editor-container {
+    .p-editor-toolbar {
+      border-radius: 2px 2px 0 0;
+      border-color: $brand-grey-300 !important;
+    }
+
+    .p-editor-content {
+      border-radius: 0 0 2px 2px;
+      border-color: $brand-grey-300 !important;
+
+      .ql-editor {
+        p {
+          font-size: 0.875rem;
+        }
+      }
+    }
+  }
+
+  .p-dropdown .p-dropdown-label.p-inputtext {
+    border: none;
+  }
+
+  .p-checkbox .p-checkbox-box.p-highlight {
+    border-color: var(--primary-color);
+    background: var(--primary-color);
+    border-radius: 2px;
+
+    &:hover {
+      border-color: var(--hover-color);
+      background: var(--hover-color);
+    }
+  }
+
+  .p-treetable {
+    .p-treetable-thead {
+      > tr > th {
+        background: white;
+      }
+    }
+
+    .p-treetable-tbody {
+      > tr > td {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .p-datatable,
+  .p-datatable.p-datatable-sm {
+    .p-column-title {
+      font-size: 14px;
+    }
+
+    .p-datatable-thead {
+      > tr > th {
+        background: white;
+        padding: 1rem;
+
+        &.p-filter-column {
+          padding: 0.5rem;
+
+          .p-checkbox {
+            margin: 0.5rem;
+          }
+        }
+      }
+    }
+
+    .p-datatable-tbody {
+      > tr > td {
+        font-size: 14px;
+
+        &.p-selection-column {
+          padding: 1rem;
+        }
+      }
+    }
+
+    .p-paginator {
+      justify-content: flex-end;
+
+      .p-button.p-paginator-element {
+        font-size: 0.8rem;
+        margin: 0;
+        border: 1px solid var(--gray-300);
+        border-right: none;
+        padding: 0.375rem;
+        background: white;
+        border-radius: 0;
+        width: 32px !important;
+        height: 32px !important;
+        min-width: unset;
+        color: var(--primary-color);
+        box-shadow: none;
+
+        &.p-highlight {
+          color: white;
+          background: var(--primary-color);
+          border-color: var(--primary-color);
+        }
+      }
+
+      .p-button.p-paginator-element.p-paginator-first {
+        border-bottom-left-radius: 0.125rem;
+        border-top-left-radius: 0.125rem;
+      }
+
+      .p-button.p-paginator-element.p-paginator-last {
+        border-right: 1px solid var(--gray-300);
+        border-bottom-right-radius: 0.125rem;
+        border-top-right-radius: 0.125rem;
+      }
+
+      .p-button.p-paginator-element:disabled {
+        color: var(--gray-300);
+      }
+
+      .p-button.p-paginator-element:not(.p-highlight):hover {
+        background-color: var(--gray-200);
+      }
+
+      .p-dropdown {
+        height: 32px;
+        border-radius: 2px;
+        border: 1px solid var(--gray-300);
+        margin-left: auto;
+
+        .p-dropdown-label {
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+  }
+
+  .p-datatable,
+  .p-treetable {
+    border: 1px solid #c0d0df;
+
+    .p-datatable-thead {
+      > tr > th {
+        background: white;
+      }
+    }
+
+    .p-datatable-tbody > tr {
+      font-size: 14px;
+      color: black;
+    }
+  }
+
+  .p-inputtext {
+    border: 1px solid $brand-grey-300;
+    padding: 6px 8px;
+    border-radius: 2px;
+
+    &::placeholder {
+      color: $brand-grey-300;
+      opacity: 1;
+    }
+
+    &:-ms-input-placeholder {
+      color: $brand-grey-300;
+    }
+
+    &::-ms-input-placeholder {
+      color: $brand-grey-300;
+    }
+  }
+
+  .p-inputgroup {
+    .p-inputtext,
+    .p-inputwrapper,
+    .p-dropdown,
+    .p-editor-container,
+    .p-multiselect {
+      border-radius: 0 2px 2px 0 !important;
+      width: 100%;
+    }
+
+    .p-inputgroup-addon {
+      padding: 0;
+      background-color: $brand-grey-100;
+      border-radius: 2px 0 0 2px !important;
+      border-color: $brand-grey-300;
+    }
+  }
+
+  .p-multiselect {
+    border: 1px solid $brand-grey-300;
+    border-radius: 2px;
+
+    .p-multiselect-label {
+      padding: 8px;
+    }
+  }
+
+  .p-multiselect-panel .p-multiselect-items {
+    padding: 0;
+
+    .p-multiselect-item.p-highlight {
+      color: $brand-blue-500;
+      background-color: $brand-blue-50;
+    }
+  }
+
+  .p-column-filter {
+    &-element {
+      & .p-inputtext {
+        padding: 4px 8px;
+        border-radius: 4px;
+        border: 1px solid $brand-grey-300;
+      }
+    }
+  }
+
+  .p-inputswitch {
+    &.p-inputswitch-checked {
+      .p-inputswitch-slider {
+        background: $brand-blue-500;
+      }
+    }
+  }
+
+  .p-dialog {
+    max-width: 600px;
+
+    &.p-confirm-dialog {
+      .p-confirm-dialog-message {
+        margin-left: 0;
+      }
+    }
+  }
+
+  .p-tabview {
+    .p-tabview-nav-container {
+      width: fit-content;
+
+      .p-tabview-nav-content .p-tabview-nav {
+        background: transparent;
+
+        li {
+          background: transparent;
+          font-size: 1rem;
+
+          .p-tabview-nav-link {
+            padding: 0.5rem 1rem;
+            background: transparent !important;
+            box-shadow: none !important;
+            color: $brand-grey-600;
+            font-weight: 400;
+          }
+        }
+
+        .p-tabview-selected.p-highlight {
+          .p-tabview-nav-link {
+            .p-tabview-title {
+              color: black;
+              font-weight: 700;
+            }
+          }
+        }
+
+        .p-tabview-ink-bar {
+          background-color: $brand-blue-500;
+        }
+      }
+    }
+
+    .p-tabview-panels {
+      background: transparent;
+      padding: 0;
+      margin-top: 2rem;
+    }
+  }
+
+  .p-selectbutton .p-button.p-highlight,
+  .p-selectbutton .p-button.p-highl ight:hover {
+    background: $brand-blue-500;
+    border-color: $brand-blue-500;
+  }
+
+  .p-tabview-nav {
+    .p-tabview-nav-link {
+      padding: 8px;
+    }
+
+    .p-tabview-selected {
+      .p-tabview-nav-link {
+        .p-tabview-title {
+          color: black;
+        }
+      }
+    }
+  }
+
+  .p-chips .p-chips-multiple-container {
+    padding: 0;
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "stage-2-7beeb": {
+      "hosting": {
+        "md-extensions-site": [
+          "md-extensions-site"
+        ]
+      }
+    }
+  }
+}
