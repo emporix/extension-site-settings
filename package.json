@@ -1,6 +1,6 @@
 {
   "name": "extension-site-settings",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "dev": "vite",
     "deploy:stage": "yarn build && firebase use stage-2-7beeb && firebase deploy --only hosting:md-extensions-site",
