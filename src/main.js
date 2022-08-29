@@ -8,6 +8,7 @@ import "primeicons/primeicons.css";
 
 import "./assets/main.scss";
 import DataTable from "primevue/datatable";
+import ConfirmationService from "primevue/confirmationservice";
 import Column from "primevue/column";
 import "primeflex/primeflex.css";
 import InputText from "primevue/inputtext";
@@ -17,12 +18,14 @@ import Dropdown from "primevue/dropdown";
 import MultiSelect from "primevue/multiselect";
 import ToastService from "primevue/toastservice";
 import Toast from "primevue/toast";
+import ConfirmDialog from "primevue/confirmdialog";
 
 const app = createApp(App);
 
 app.use(PrimeVue);
 
 app.use(router);
+app.use(ConfirmationService);
 app.use(ToastService);
 app.component("DataTable", DataTable);
 app.component("Column", Column);
@@ -32,5 +35,6 @@ app.component("Button", Button);
 app.component("Dropdown", Dropdown);
 app.component("MultiSelect", MultiSelect);
 app.component("Toast", Toast);
+app.component("ConfirmDialog", ConfirmDialog);
 
 app.mount("#app");

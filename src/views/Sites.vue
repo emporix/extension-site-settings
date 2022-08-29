@@ -63,11 +63,11 @@ import Column from "primevue/column";
 import InputText from "primevue/inputtext";
 import {deleteSite, getSites} from "../api";
 
-
 import {ref, watch} from "vue";
 import useStore from "../composition/useStore";
 import {FilterMatchMode} from "primevue/api";
 import {useToast} from "primevue/usetoast";
+import {useConfirm} from "primevue/useconfirm";
 
 export default {
   components: [DataTable, Column, InputText],
@@ -75,6 +75,8 @@ export default {
     const toast = useToast();
     const selectedSites = ref();
     const sites = ref([]);
+    const {tenant} = useStore();
+    const confirm = useConfirm();
     const filters = ref({
       code: {value: null, matchMode: FilterMatchMode.CONTAINS},
       name: {value: null, matchMode: FilterMatchMode.CONTAINS},
@@ -83,29 +85,38 @@ export default {
       sites.value = await getSites();
     })();
 
-    const {tenant} = useStore();
     watch(tenant, async () => {
-      const data = await getSites();
-      sites.value = data;
+      sites.value = await getSites();
     });
 
     const removeSite = async (code) => {
-      try {
-        await deleteSite(code);
-        toast.add({
-          severity: "success",
-          summary: "Site deleted",
-          detail: `Site ${code} deleted`,
-          life: 3000,
-        });
-      } catch (error) {
-        toast.add({
-          severity: "error",
-          summary: error.response.data.message,
-          detail: error.response.data.details[0].message,
-          life: 3000,
-        });
-      }
+      confirm.require({
+        header: `Removing site ${code}`,
+        message: "Are you sure you want to proceed?",
+        icon: "pi pi-exclamation-triangle",
+        accept: async () => {
+          try {
+            await deleteSite(code);
+            toast.add({
+              severity: "success",
+              summary: "Site deleted",
+              detail: `Site ${code} deleted`,
+              life: 3000,
+            });
+            sites.value = await getSites();
+          } catch (error) {
+            toast.add({
+              severity: "error",
+              summary: error.response.data.message,
+              detail: error.response.data.details[0].message,
+              life: 3000,
+            });
+          }
+        },
+        reject: () => {
+          //callback to execute when user rejects the action
+        },
+      });
     };
 
     return {
