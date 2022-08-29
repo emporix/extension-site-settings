@@ -29,8 +29,28 @@ export const getSite = async (code) => {
   return resp.data;
 };
 
+export const deleteSite = async (code) => {
+  const tenant = JSON.parse(localStorage.getItem("tenant"));
+  const resp = await api.delete(`/site/${tenant}/sites/${code}`);
+  return resp.data;
+};
+
 export const updateSite = async (code, site) => {
   const tenant = JSON.parse(localStorage.getItem("tenant"));
   const resp = await api.patch(`/site/${tenant}/sites/${code}`, { ...site });
+  return resp.data;
+};
+
+export const createSite = async (site) => {
+  const tenant = JSON.parse(localStorage.getItem("tenant"));
+  const resp = await api.post(`/site/${tenant}/sites/`, { ...site });
+  return resp.data;
+};
+
+export const getActiveCurrencies = async () => {
+  const tenant = JSON.parse(localStorage.getItem("tenant"));
+  const resp = await api.get(`/currency/${tenant}/currencies`, {
+    params: { pageSize: 10000 },
+  });
   return resp.data;
 };

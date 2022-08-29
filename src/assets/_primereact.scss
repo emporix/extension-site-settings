@@ -7,12 +7,15 @@ body {
     border-radius: 2px;
     font-family: 'Lato', sans-serif;
     font-style: normal;
-    font-weight: 700;
+    font-weight: bold;
     font-size: 12px;
     text-transform: uppercase;
     color: #ffffff;
     padding: 8px 24px;
     cursor: pointer;
+    > span {
+      font-weight: bold;
+    }
 
     &.p-button-text {
       color: var(--icon-color);
@@ -137,7 +140,10 @@ body {
   .p-datatable,
   .p-datatable.p-datatable-sm {
     .p-column-title {
+      line-height: 1.6;
       font-size: 14px;
+      font-weight: bold;
+      color: #343a40;
     }
 
     .p-datatable-thead {
