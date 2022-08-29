@@ -27,7 +27,7 @@ registerCallback("siteSettingsExtension", (ctx) => {
       <RouterView/>
     </main>
     <Toast/>
-    <ConfirmDialog></ConfirmDialog>
+    <ConfirmDialog/>
   </div>
 </template>
 
