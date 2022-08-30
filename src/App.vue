@@ -1,12 +1,12 @@
 <script setup>
-import {RouterView, useRoute} from "vue-router";
+import { RouterView, useRoute } from "vue-router";
 import Toast from "primevue/toast";
-import {watch} from "vue";
-import {registerCallback, registerClient, syncUrl} from "md-ext/lib";
+import { watch } from "vue";
+import { registerCallback, registerClient, syncUrl } from "md-ext/lib";
 import useStore from "./composition/useStore";
 
 const route = useRoute();
-const {setState} = useStore();
+const { setState } = useStore();
 
 watch(route, () => {
   syncUrl(route.fullPath);
@@ -17,17 +17,17 @@ registerCallback("siteSettingsExtension", (ctx) => {
   Object.keys(ctx.value).forEach((key) => {
     localStorage.setItem(key, JSON.stringify(ctx.value[key]));
   });
-  setState({tenant: ctx.value.tenant, site: ctx.value.currentSite});
+  setState({ tenant: ctx.value.tenant, site: ctx.value.currentSite });
 });
 </script>
 
 <template>
   <div class="app">
     <main>
-      <RouterView/>
+      <RouterView />
     </main>
-    <Toast/>
-    <ConfirmDialog/>
+    <Toast />
+    <ConfirmDialog />
   </div>
 </template>
 

@@ -25,16 +25,22 @@ export default {
         value: "AT",
       },
     ]);
-    (async () => {
+
+    onMounted(async () => {
       if (code) {
         site.value = await getSite(code);
       } else {
         const mainSiteData = await getSite("main");
-        site.value = {...mainSiteData, name: "", code: "", shipToCountries: []};
+        site.value = {
+          ...mainSiteData,
+          name: "",
+          code: "",
+          shipToCountries: [],
+        };
       }
       currencies.value = await getActiveCurrencies();
       currentTenant.value = tenant.value;
-    })();
+    });
 
     const saveSite = async (site) => {
       if (code) {

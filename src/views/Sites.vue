@@ -24,7 +24,7 @@
               v-model="filterModel.value"
               @keydown.enter="filterCallback()"
               class="p-column-filter"
-              :placeholder="`Search by name - `"
+              placeholder="Search by code"
           />
         </template>
         <template #body="slotProps">
@@ -112,9 +112,6 @@ export default {
               life: 3000,
             });
           }
-        },
-        reject: () => {
-          //callback to execute when user rejects the action
         },
       });
     };

@@ -5,23 +5,24 @@ $end-color-hover: #128afb;
 $hover: rgba(255, 255, 255, 0.5);
 $action-color: linear-gradient(180deg, $start-color 0%, $end-color 100%);
 $action-color-hover: linear-gradient(
-                180deg,
-                $end-color-hover 0%,
-                $start-color-hover 100%
+  180deg,
+  $end-color-hover 0%,
+  $start-color-hover 100%
 );
-$brand-blue-50: #F2FAFE;
+$brand-blue-50: #f2fafe;
 $brand-blue-500: #128afb;
 $brand-blue-700: #1070c9;
 
 $brand-white-100: #fafbfc;
-$brand-white-200: #F0F4F8;
+$brand-white-200: #f0f4f8;
 
-$brand-grey-100: #F0F4F8;
+$brand-grey-100: #f0f4f8;
 $brand-grey-300: #c0d0df;
 $brand-grey-400: #99acbc;
-$brand-grey-500: #7B8B99;
+$brand-grey-500: #7b8b99;
 $brand-grey-600: #596168;
+$brand-grey-1000: #131414;
 
-$brand-gold: #FFE091;
+$brand-gold: #ffe091;
 
-$green-700: #10C929;
+$green-700: #10c929;
