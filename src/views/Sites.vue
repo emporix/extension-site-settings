@@ -4,27 +4,27 @@
       <h1 class="module-title">Sites</h1>
     </div>
     <div class="col-1 mb-3">
-      <Button label="Add site" @click="$router.replace(`create-site/`)"/>
+      <Button label="Add site" @click="$router.replace(`create-site/`)" />
     </div>
     <DataTable
-        :value="sites"
-        style="width: 100%"
-        selection-mode="multiple"
-        v-model:selection="selectedSites"
-        dataKey="code"
-        filter-display="row"
-        v-model:filters="filters"
-        responsiveLayout="scroll"
+      :value="sites"
+      style="width: 100%"
+      selection-mode="multiple"
+      v-model:selection="selectedSites"
+      dataKey="code"
+      filter-display="row"
+      v-model:filters="filters"
+      responsiveLayout="scroll"
     >
       <Column selectionMode="multiple" headerStyle="width: 3em"></Column>
       <Column field="code" header="Code" :show-filter-menu="false" sortable>
         <template #filter="{ filterModel, filterCallback }">
           <InputText
-              type="text"
-              v-model="filterModel.value"
-              @keydown.enter="filterCallback()"
-              class="p-column-filter"
-              placeholder="Search by code"
+            type="text"
+            v-model="filterModel.value"
+            @keydown.enter="filterCallback()"
+            class="p-column-filter"
+            placeholder="Search by code"
           />
         </template>
         <template #body="slotProps">
@@ -34,11 +34,11 @@
       <Column field="name" header="Name" :show-filter-menu="false" sortable>
         <template #filter="{ filterModel, filterCallback }">
           <InputText
-              type="text"
-              v-model="filterModel.value"
-              class="p-column-filter"
-              placeholder="Search by name"
-              @keydown.enter="filterCallback()"
+            type="text"
+            v-model="filterModel.value"
+            class="p-column-filter"
+            placeholder="Search by name"
+            @keydown.enter="filterCallback()"
           />
         </template>
       </Column>
@@ -46,8 +46,8 @@
         <template #body="slotProps">
           <div class="flex align-items-center justify-content-around">
             <i
-                class="pi pi-pencil"
-                @click="$router.replace(`site/${slotProps.data.code}`)"
+              class="pi pi-pencil"
+              @click="$router.replace(`site/${slotProps.data.code}`)"
             ></i>
             <i class="pi pi-trash" @click="removeSite(slotProps.data.code)"></i>
           </div>
@@ -63,7 +63,7 @@ import Column from "primevue/column";
 import InputText from "primevue/inputtext";
 import {deleteSite, getSites} from "../api";
 
-import {ref, watch} from "vue";
+import {onMounted, ref, watch} from "vue";
 import useStore from "../composition/useStore";
 import {FilterMatchMode} from "primevue/api";
 import {useToast} from "primevue/usetoast";
@@ -81,9 +81,10 @@ export default {
       code: {value: null, matchMode: FilterMatchMode.CONTAINS},
       name: {value: null, matchMode: FilterMatchMode.CONTAINS},
     });
-    (async () => {
+
+    onMounted(async () => {
       sites.value = await getSites();
-    })();
+    })
 
     watch(tenant, async () => {
       sites.value = await getSites();
