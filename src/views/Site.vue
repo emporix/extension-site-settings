@@ -1,8 +1,8 @@
 <script>
-import { useToast } from "primevue/usetoast";
+import {useToast} from "primevue/usetoast";
 import {computed, ref} from "vue";
 import {useRoute, useRouter} from "vue-router";
-import {getSite, updateSite} from "../api";
+import {createSite, getActiveCurrencies, getSite, updateSite} from "../api";
 import useStore from "../composition/useStore";
 
 export default {
@@ -14,6 +14,7 @@ export default {
     const currentTenant = ref("");
     const site = ref({});
     const toast = useToast();
+    const currencies = ref([]);
     const countries = ref([
       {
         label: "Deutschland",
@@ -24,26 +25,54 @@ export default {
         value: "AT",
       },
     ]);
-    (async () => {
-      site.value = await getSite(code);
+
+    onMounted(async () => {
+      if (code) {
+        site.value = await getSite(code);
+      } else {
+        const mainSiteData = await getSite("main");
+        site.value = {
+          ...mainSiteData,
+          name: "",
+          code: "",
+          shipToCountries: [],
+        };
+      }
+      currencies.value = await getActiveCurrencies();
       currentTenant.value = tenant.value;
-    })();
+    });
 
     const saveSite = async (site) => {
-      try {
-        await updateSite(code, site);
-        await router.push("/");
-      } catch (error) {
-        toast.add({
-          severity: "error",
-          summary: error.response.data.message,
-          detail: error.response.data.details[0].message,
-          life: 3000,
-        });
+      if (code) {
+        try {
+          await updateSite(code, site);
+          await router.push("/");
+        } catch (error) {
+          toast.add({
+            severity: "error",
+            summary: error.response.data.message,
+            detail: error.response.data.details[0].message,
+            life: 3000,
+          });
+        }
+      } else {
+        try {
+          await createSite(site);
+          await router.push("/");
+        } catch (error) {
+          toast.add({
+            severity: "error",
+            summary: error.response.data.message,
+            detail: error.response.data.details[0].message,
+            life: 3000,
+          });
+        }
       }
     };
 
     return {
+      code,
+      currencies,
       site,
       saveSite,
       router,
@@ -65,6 +94,16 @@ export default {
       <Button label="Save" @click="saveSite(site)"></Button>
     </div>
     <div class="section-box-wrapper grid">
+      <div class="flex field align-items-center col-12">
+        <label class="mb-0" for="name">Active</label>
+        <Checkbox
+            class="ml-2"
+            binary
+            v-model="site.active"
+            id="code"
+            type="text"
+        />
+      </div>
       <div class="field col-5">
         <label for="name">Name</label>
         <InputText
@@ -77,21 +116,11 @@ export default {
       <div class="field col-5">
         <label for="name">Code</label>
         <InputText
-            disabled
+            :disabled="code !== undefined"
             v-model="site.code"
             id="code"
             type="text"
             class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-        />
-      </div>
-      <div class="flex field align-items-center col-5">
-        <label class="mb-0" for="name">Active</label>
-        <Checkbox
-            class="ml-2"
-            binary
-            v-model="site.active"
-            id="code"
-            type="text"
         />
       </div>
       <div class="flex flex-column field col-5">
@@ -101,6 +130,16 @@ export default {
             v-model="site.shipToCountries"
             optionLabel="label"
             optionValue="value"
+        />
+      </div>
+      <div class="flex flex-column field col-5">
+        <label for="name">Currency</label>
+        <Dropdown
+            filter
+            :options="currencies"
+            v-model="site.currency"
+            optionLabel="code"
+            optionValue="code"
         />
       </div>
     </div>

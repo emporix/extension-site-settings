@@ -2,7 +2,6 @@
 @import "./base.scss";
 @import "./_primereact.scss";
 
-
 #app {
   font-weight: normal;
 }
@@ -16,10 +15,9 @@ a,
 
 @media (hover: hover) {
   a:hover {
-    background-color: $brand-blue-50
+    background-color: $brand-blue-50;
   }
 }
-
 
 .module {
   //@include styleclass('grid m-0 overflow-y-scroll w-full align-items-center');
