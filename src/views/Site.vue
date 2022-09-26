@@ -1,6 +1,6 @@
 <script>
 import {useToast} from "primevue/usetoast";
-import {computed, ref} from "vue";
+import { computed, onMounted, ref } from "vue";
 import {useRoute, useRouter} from "vue-router";
 import {createSite, getActiveCurrencies, getSite, updateSite} from "../api";
 import useStore from "../composition/useStore";
