@@ -13,6 +13,7 @@ body {
     color: #ffffff;
     padding: 8px 24px;
     cursor: pointer;
+
     > span {
       font-weight: bold;
     }
@@ -28,12 +29,15 @@ body {
         padding: 6px 0;
         width: 2.125rem;
       }
+
       &.p-button-icon-only:enabled:hover {
         color: $brand-blue-500;
       }
+
       &.p-button-icon-only:disabled {
         color: $brand-grey-300;
       }
+
       &.p-button-icon-only:enabled:active {
         color: $brand-blue-700;
       }

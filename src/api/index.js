@@ -1,56 +1,56 @@
-import axios from "axios";
+import axios from 'axios'
 
-const BASE_URL = "https://api-dev.emporix.io";
+const BASE_URL = 'https://api-dev.emporix.io'
 
 const api = axios.create({
-  baseURL: BASE_URL,
-});
+    baseURL: BASE_URL,
+})
 
 api.interceptors.request.use((request) => {
-  const accessToken = JSON.parse(localStorage.getItem("accessToken"));
-  const { headers } = request;
-  if (headers) {
-    headers.Authorization = `Bearer ${accessToken}`;
-    headers["Accept-Language"] = "*";
-    headers["Content-Language"] = "*";
-  }
-  return request;
-});
+    const accessToken = JSON.parse(localStorage.getItem('accessToken'))
+    const { headers } = request
+    if (headers) {
+        headers.Authorization = `Bearer ${accessToken}`
+        headers['Accept-Language'] = '*'
+        headers['Content-Language'] = '*'
+    }
+    return request
+})
 
 export const getSites = async () => {
-  const tenant = JSON.parse(localStorage.getItem("tenant"));
-  const resp = await api.get(`/site/${tenant}/sites`);
-  return resp.data;
-};
+    const tenant = JSON.parse(localStorage.getItem('tenant'))
+    const resp = await api.get(`/site/${tenant}/sites`)
+    return resp.data
+}
 
 export const getSite = async (code) => {
-  const tenant = JSON.parse(localStorage.getItem("tenant"));
-  const resp = await api.get(`/site/${tenant}/sites/${code}`);
-  return resp.data;
-};
+    const tenant = JSON.parse(localStorage.getItem('tenant'))
+    const resp = await api.get(`/site/${tenant}/sites/${code}`)
+    return resp.data
+}
 
 export const deleteSite = async (code) => {
-  const tenant = JSON.parse(localStorage.getItem("tenant"));
-  const resp = await api.delete(`/site/${tenant}/sites/${code}`);
-  return resp.data;
-};
+    const tenant = JSON.parse(localStorage.getItem('tenant'))
+    const resp = await api.delete(`/site/${tenant}/sites/${code}`)
+    return resp.data
+}
 
 export const updateSite = async (code, site) => {
-  const tenant = JSON.parse(localStorage.getItem("tenant"));
-  const resp = await api.patch(`/site/${tenant}/sites/${code}`, { ...site });
-  return resp.data;
-};
+    const tenant = JSON.parse(localStorage.getItem('tenant'))
+    const resp = await api.patch(`/site/${tenant}/sites/${code}`, { ...site })
+    return resp.data
+}
 
 export const createSite = async (site) => {
-  const tenant = JSON.parse(localStorage.getItem("tenant"));
-  const resp = await api.post(`/site/${tenant}/sites/`, { ...site });
-  return resp.data;
-};
+    const tenant = JSON.parse(localStorage.getItem('tenant'))
+    const resp = await api.post(`/site/${tenant}/sites/`, { ...site })
+    return resp.data
+}
 
 export const getActiveCurrencies = async () => {
-  const tenant = JSON.parse(localStorage.getItem("tenant"));
-  const resp = await api.get(`/currency/${tenant}/currencies`, {
-    params: { pageSize: 10000 },
-  });
-  return resp.data;
-};
+    const tenant = JSON.parse(localStorage.getItem('tenant'))
+    const resp = await api.get(`/currency/${tenant}/currencies`, {
+        params: { pageSize: 10000 },
+    })
+    return resp.data
+}

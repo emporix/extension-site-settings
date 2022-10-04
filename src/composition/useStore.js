@@ -1,17 +1,17 @@
-import { reactive, computed } from "vue";
+import { computed, reactive } from 'vue'
 
 const state = reactive({
-  tenant: "",
-  site: {},
-});
+    tenant: '',
+    site: {},
+})
 
 export const setState = (newState) => {
-  state.tenant = newState.tenant;
-  state.site = newState.site;
-};
+    state.tenant = newState.tenant
+    state.site = newState.site
+}
 
 export default () => ({
-  tenant: computed(() => state.tenant),
-  site: computed(() => state.site),
-  setState,
-});
+    tenant: computed(() => state.tenant),
+    site: computed(() => state.site),
+    setState,
+})

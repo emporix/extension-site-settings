@@ -5,9 +5,9 @@ $end-color-hover: #128afb;
 $hover: rgba(255, 255, 255, 0.5);
 $action-color: linear-gradient(180deg, $start-color 0%, $end-color 100%);
 $action-color-hover: linear-gradient(
-  180deg,
-  $end-color-hover 0%,
-  $start-color-hover 100%
+                180deg,
+                $end-color-hover 0%,
+                $start-color-hover 100%
 );
 $brand-blue-50: #f2fafe;
 $brand-blue-500: #128afb;
