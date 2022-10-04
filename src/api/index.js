@@ -1,10 +1,15 @@
 import axios from 'axios'
 
-const BASE_URL = 'https://api-dev.emporix.io'
+const getBaseUrl = () => {
+    try {
+        return JSON.parse(localStorage.getItem('emporixApiUrl'))
+    } catch (error) {
+        console.error(error)
+        return 'https://api-dev.emporix.io'
+    }
+}
 
-const api = axios.create({
-    baseURL: BASE_URL,
-})
+const api = axios.create()
 
 api.interceptors.request.use((request) => {
     const accessToken = JSON.parse(localStorage.getItem('accessToken'))
@@ -19,38 +24,48 @@ api.interceptors.request.use((request) => {
 
 export const getSites = async () => {
     const tenant = JSON.parse(localStorage.getItem('tenant'))
-    const resp = await api.get(`/site/${tenant}/sites`)
+    const resp = await api.get(`${getBaseUrl()}/site/${tenant}/sites`)
     return resp.data
 }
 
 export const getSite = async (code) => {
     const tenant = JSON.parse(localStorage.getItem('tenant'))
-    const resp = await api.get(`/site/${tenant}/sites/${code}`)
+    const resp = await api.get(`${getBaseUrl()}/site/${tenant}/sites/${code}`)
     return resp.data
 }
 
 export const deleteSite = async (code) => {
     const tenant = JSON.parse(localStorage.getItem('tenant'))
-    const resp = await api.delete(`/site/${tenant}/sites/${code}`)
+    const resp = await api.delete(
+        `${getBaseUrl()}/site/${tenant}/sites/${code}`
+    )
     return resp.data
 }
 
 export const updateSite = async (code, site) => {
     const tenant = JSON.parse(localStorage.getItem('tenant'))
-    const resp = await api.patch(`/site/${tenant}/sites/${code}`, { ...site })
+    const resp = await api.patch(
+        `${getBaseUrl()}/site/${tenant}/sites/${code}`,
+        { ...site }
+    )
     return resp.data
 }
 
 export const createSite = async (site) => {
     const tenant = JSON.parse(localStorage.getItem('tenant'))
-    const resp = await api.post(`/site/${tenant}/sites/`, { ...site })
+    const resp = await api.post(`${getBaseUrl()}/site/${tenant}/sites/`, {
+        ...site,
+    })
     return resp.data
 }
 
 export const getActiveCurrencies = async () => {
     const tenant = JSON.parse(localStorage.getItem('tenant'))
-    const resp = await api.get(`/currency/${tenant}/currencies`, {
-        params: { pageSize: 10000 },
-    })
+    const resp = await api.get(
+        `${getBaseUrl()}/currency/${tenant}/currencies`,
+        {
+            params: { pageSize: 10000 },
+        }
+    )
     return resp.data
 }

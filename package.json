@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "vite",
-    "deploy:stage": "yarn build && firebase use stage-2-7beeb && firebase deploy --only hosting:md-extensions-site",
+    "deploy": "yarn build && firebase use stage-2-7beeb && firebase deploy --only hosting:md-extensions-site",
     "build": "vite build",
     "preview": "vite preview --port 4173",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
