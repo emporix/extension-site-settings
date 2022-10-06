@@ -69,3 +69,23 @@ export const getActiveCurrencies = async () => {
     )
     return resp.data
 }
+
+export const getActiveCountries = async () => {
+    const tenant = JSON.parse(localStorage.getItem('tenant'))
+    const params = {
+        active: true,
+        pageSize: '1000',
+        sort: 'code:asc',
+    }
+    const headers = {
+        'X-Version': 'v2',
+    }
+    const { data } = await api.get(
+        `${getBaseUrl()}/country/${tenant}/countries`,
+        {
+            params,
+            headers,
+        }
+    )
+    return data
+}
