@@ -2,7 +2,13 @@
 import { useToast } from 'primevue/usetoast'
 import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { createSite, getActiveCurrencies, getSite, updateSite } from '../api'
+import {
+    createSite,
+    getActiveCurrencies,
+    getSite,
+    updateSite,
+    getActiveCountries,
+} from '../api'
 import useStore from '../composition/useStore'
 
 export default {
@@ -15,16 +21,7 @@ export default {
         const site = ref({})
         const toast = useToast()
         const currencies = ref([])
-        const countries = ref([
-            {
-                label: 'Deutschland',
-                value: 'DE',
-            },
-            {
-                label: 'Österreich',
-                value: 'AT',
-            },
-        ])
+        const countries = ref([])
 
         onMounted(async () => {
             if (code) {
@@ -39,6 +36,17 @@ export default {
                 }
             }
             currencies.value = await getActiveCurrencies()
+            const rawCountries = await getActiveCountries()
+            const lang = localStorage
+                .getItem('contentLanguage')
+                .replaceAll('"', '')
+
+            countries.value = rawCountries.map((c) => {
+                return {
+                    value: c.code,
+                    label: c.name[lang],
+                }
+            })
             currentTenant.value = tenant.value
         })
 
