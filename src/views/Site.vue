@@ -24,8 +24,6 @@ export default {
         const countries = ref([])
 
         const countriesOptions = computed(() => {
-            console.log(countries)
-            console.log(countries.value)
             return countries.value.map((c) => {
                 return {
                     value: c.code,
