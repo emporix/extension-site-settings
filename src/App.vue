@@ -17,12 +17,16 @@ registerCallback('siteSettingsExtension', (ctx) => {
     Object.keys(ctx.value).forEach((key) => {
         localStorage.setItem(key, JSON.stringify(ctx.value[key]))
     })
-    setState({ tenant: ctx.value.tenant, site: ctx.value.currentSite })
+    setState({
+        tenant: ctx.value.tenant,
+        site: ctx.value.currentSite,
+        contentLanguage: ctx.value.contentLanguage,
+    })
 })
 </script>
 
 <template>
-    <div class='app'>
+    <div class="app">
         <main>
             <RouterView />
         </main>

@@ -15,13 +15,22 @@ export default {
     setup() {
         const { params } = useRoute()
         const { code } = params
-        const { tenant } = useStore()
+        const { tenant, contentLanguage } = useStore()
         const router = useRouter()
         const currentTenant = ref('')
         const site = ref({})
         const toast = useToast()
         const currencies = ref([])
         const countries = ref([])
+
+        const countriesOptions = computed(() => {
+            return countries.value.map((c) => {
+                return {
+                    value: c.code,
+                    label: c.name[contentLanguage],
+                }
+            })
+        })
 
         onMounted(async () => {
             if (code) {
@@ -37,16 +46,8 @@ export default {
             }
             currencies.value = await getActiveCurrencies()
             const rawCountries = await getActiveCountries()
-            const lang = localStorage
-                .getItem('contentLanguage')
-                .replaceAll('"', '')
 
-            countries.value = rawCountries.map((c) => {
-                return {
-                    value: c.code,
-                    label: c.name[lang],
-                }
-            })
+            countries.value = rawCountries
             currentTenant.value = tenant.value
         })
 
@@ -81,6 +82,7 @@ export default {
         return {
             code,
             currencies,
+            countriesOptions,
             site,
             saveSite,
             router,
@@ -134,7 +136,7 @@ export default {
             <div class="flex flex-column field col-5">
                 <label for="name">Ship to countries</label>
                 <MultiSelect
-                    :options="countries"
+                    :options="countriesOptions"
                     v-model="site.shipToCountries"
                     optionLabel="label"
                     optionValue="value"
