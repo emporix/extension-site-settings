@@ -27,7 +27,7 @@ export default {
             return countries.value.map((c) => {
                 return {
                     value: c.code,
-                    label: c.name[contentLanguage],
+                    label: c.name[contentLanguage] || c.name.en,
                 }
             })
         })
@@ -98,7 +98,7 @@ export default {
             <RouterLink class="flex align-items-center" to="/">
                 <i class="pi pi-chevron-left"></i> Back to sites
             </RouterLink>
-            <h1 class="ml-1 module-title">Site</h1>
+            <h1 class="ml-1 module-title">{{site.name}}</h1>
         </div>
         <div class="col-1 mb-3 justify-content-end">
             <Button label="Save" @click="saveSite(site)"></Button>
