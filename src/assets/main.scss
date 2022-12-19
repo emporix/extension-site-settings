@@ -22,19 +22,19 @@ a,
 .module {
   //@include styleclass('grid m-0 overflow-y-scroll w-full align-items-center');
   background-color: #fafbfc;
-  padding: 40px;
+  padding: 48px;
   height: 100%;
   overflow: auto;
 
   .module-title {
     //@include styleclass('my-2');
-    font-weight: 700;
+    font-weight: 600;
     font-size: 2rem;
     color: #131414;
   }
 
   .module-subtitle {
-    font-weight: 700;
+    font-weight: 600;
     font-size: 1.25rem;
     line-height: 1.5rem;
   }

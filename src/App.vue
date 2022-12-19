@@ -21,6 +21,7 @@ registerCallback('siteSettingsExtension', (ctx) => {
         tenant: ctx.value.tenant,
         site: ctx.value.currentSite,
         contentLanguage: ctx.value.contentLanguage,
+        languages: ctx.value.configuration.languages,
     })
 })
 </script>
