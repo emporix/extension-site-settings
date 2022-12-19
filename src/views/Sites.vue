@@ -1,8 +1,14 @@
 <template>
     <div class="module grid grid-nogutter">
-        <div class="col-12 mb-3 flex justify-content-between align-items-center">
+        <div
+            class="col-12 mb-3 flex justify-content-between align-items-center"
+        >
             <h1 class="module-title">Sites</h1>
-          <Button class="h-2rem" label="Add site" @click="$router.replace(`create-site/`)" />
+            <Button
+                class="h-2rem"
+                label="Add site"
+                @click="$router.replace(`create-site/`)"
+            />
         </div>
         <DataTable
             :value="sites"
@@ -103,10 +109,20 @@
             </Column>
             <Column
                 field="homeBase.address"
+                filterField="homeBase.address"
                 header="Home Base Address"
                 :show-filter-menu="false"
-                :sortable="true"
             >
+                <!--                <template #filter="{ filterModel, filterCallback }">-->
+                <!--                    <InputText-->
+                <!--                        type="text"-->
+                <!--                        v-model="filterModel.value"-->
+                <!--                        @keydown.enter="filterCallback()"-->
+                <!--                        class="p-column-filter"-->
+                <!--                        placeholder="Search by city"-->
+                <!--                    />-->
+                <!--                  -->
+                <!--                </template>-->
                 <template #body="slotProps">{{
                     transformAddressObj(slotProps.data.homeBase.address)
                 }}</template>
@@ -178,6 +194,7 @@ export default {
                 value: null,
                 matchMode: FilterMatchMode.CONTAINS,
             },
+            homeBase: { value: null, matchMode: FilterMatchMode.CONTAINS },
         })
 
         onMounted(async () => {
