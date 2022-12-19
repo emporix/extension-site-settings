@@ -113,16 +113,6 @@
                 header="Home Base Address"
                 :show-filter-menu="false"
             >
-                <!--                <template #filter="{ filterModel, filterCallback }">-->
-                <!--                    <InputText-->
-                <!--                        type="text"-->
-                <!--                        v-model="filterModel.value"-->
-                <!--                        @keydown.enter="filterCallback()"-->
-                <!--                        class="p-column-filter"-->
-                <!--                        placeholder="Search by city"-->
-                <!--                    />-->
-                <!--                  -->
-                <!--                </template>-->
                 <template #body="slotProps">{{
                     transformAddressObj(slotProps.data.homeBase.address)
                 }}</template>

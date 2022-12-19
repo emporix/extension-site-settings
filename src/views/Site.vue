@@ -35,11 +35,9 @@ export default {
         onMounted(async () => {
             if (code) {
                 const currentSite = await getSite(code)
-                console.log('current site: ', currentSite)
                 site.value = currentSite
             } else {
                 const mainSiteData = await getSite('main')
-                console.log('main site: ', mainSiteData)
                 site.value = {
                     ...mainSiteData,
                     name: '',
@@ -57,9 +55,6 @@ export default {
                 }
             }
         })
-        const printSite = (site) => {
-            console.log('site: ', site)
-        }
         const saveSite = async (site) => {
             if (code) {
                 try {
@@ -94,7 +89,6 @@ export default {
             languages,
             site,
             saveSite,
-            printSite,
             router,
             countries: computed(() => countries.value),
         }
