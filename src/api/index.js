@@ -24,7 +24,11 @@ api.interceptors.request.use((request) => {
 
 export const getSites = async () => {
     const tenant = JSON.parse(localStorage.getItem('tenant'))
-    const resp = await api.get(`${getBaseUrl()}/site/${tenant}/sites`)
+    const resp = await api.get(`${getBaseUrl()}/site/${tenant}/sites`, {
+        params: {
+            includeInactive: true,
+        },
+    })
     return resp.data
 }
 
