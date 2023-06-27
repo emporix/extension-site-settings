@@ -6,6 +6,7 @@ import {
     createSite,
     getActiveCountries,
     getActiveCurrencies,
+    getPaymentMethods,
     getSite,
     updateSite,
 } from '../api'
@@ -22,6 +23,7 @@ export default {
         const toast = useToast()
         const currencies = ref([])
         const countries = ref([])
+        const paymentMethods = ref([])
 
         const countriesOptions = computed(() => {
             return countries.value.map((c) => {
@@ -43,10 +45,12 @@ export default {
                     name: '',
                     code: '',
                     shipToCountries: [],
+                    payment: [],
                 }
             }
             currencies.value = await getActiveCurrencies()
             countries.value = await getActiveCountries()
+            paymentMethods.value = await getPaymentMethods()
             currentTenant.value = tenant
             if (!site.value.homeBase.location) {
                 site.value.homeBase.location = {
@@ -54,8 +58,26 @@ export default {
                     latitude: null,
                 }
             }
+            site.value.payment = site.value.payment.map(payment => payment.id)
         })
+        
+        const rewritePaymentMethods = (site) => {
+            if(paymentMethods.value && paymentMethods.value.length > 0) {
+                site.payment = paymentMethods.value.filter(method => site.payment.includes(method.id))
+                .map(selectedMethod => {
+                    return {
+                        id: selectedMethod.id,
+                        name: selectedMethod.code,
+                        serviceType: selectedMethod.provider,
+                        serviceUrl: '',
+                        active: true  
+                    }
+                })
+            }
+        }
+        
         const saveSite = async (site) => {
+            rewritePaymentMethods(site)
             if (code) {
                 try {
                     await updateSite(code, site)
@@ -87,6 +109,7 @@ export default {
             currencies,
             countriesOptions,
             languages,
+            paymentMethods,
             site,
             saveSite,
             router,
@@ -170,6 +193,15 @@ export default {
                     :options="languages"
                     v-model="site.languages"
                     optionLabel="label"
+                    optionValue="id"
+                />
+            </div>
+            <div class="flex flex-column field col-5" v-if="paymentMethods && paymentMethods.length > 0">
+                <label for="name">Payment methods</label>
+                <MultiSelect
+                    :options="paymentMethods"
+                    v-model="site.payment"
+                    optionLabel="code"
                     optionValue="id"
                 />
             </div>
