@@ -58,7 +58,9 @@ export default {
                     latitude: null,
                 }
             }
-            site.value.payment = site.value.payment.map(payment => payment.id)
+            if(paymentMethods.value && paymentMethods.value.length > 0) {
+                site.value.payment = site.value.payment.map(payment => payment.id)                
+            }
         })
         
         const rewritePaymentMethods = (site) => {
