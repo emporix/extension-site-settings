@@ -74,6 +74,17 @@ export const getActiveCurrencies = async () => {
     return resp.data
 }
 
+export const getPaymentMethods = async () => {
+    const tenant = JSON.parse(localStorage.getItem('tenant'))
+    const resp = await api.get(
+        `${getBaseUrl()}/payment-gateway/${tenant}/paymentmodes/config`,
+        {
+            params: { pageSize: 10000 },
+        }
+    )
+    return resp.data    
+}
+
 export const getActiveCountries = async () => {
     const tenant = JSON.parse(localStorage.getItem('tenant'))
     const params = {
