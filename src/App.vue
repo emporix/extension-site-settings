@@ -1,16 +1,10 @@
 <script setup>
-import { RouterView, useRoute } from 'vue-router'
+import { RouterView } from 'vue-router'
 import Toast from 'primevue/toast'
-import { watch } from 'vue'
-import { registerCallback, registerClient, syncUrl } from 'md-ext/lib'
+import { registerCallback, registerClient } from 'md-ext/lib'
 import useStore from './composition/useStore'
 
-const route = useRoute()
 const { setState } = useStore()
-
-watch(route, () => {
-    syncUrl(route.fullPath)
-})
 
 registerClient()
 registerCallback('siteSettingsExtension', (ctx) => {
