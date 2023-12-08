@@ -5,7 +5,7 @@ const getBaseUrl = () => {
         return JSON.parse(localStorage.getItem('emporixApiUrl'))
     } catch (error) {
         console.error(error)
-        return 'https://api-dev.emporix.io'
+        return 'https://api-stage.emporix.io'
     }
 }
 
