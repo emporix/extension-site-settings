@@ -61,6 +61,11 @@ export default {
             if(paymentMethods.value && paymentMethods.value.length > 0) {
                 site.value.payment = site.value.payment.map(payment => payment.id)                
             }
+            if(!site.value.assistantBuying) {
+                site.value.assistantBuying = {
+                    storefrontUrl : ''
+                }
+            }
         })
         
         const rewritePaymentMethods = (site) => {
@@ -282,6 +287,19 @@ export default {
                     <InputText
                         v-model="site.homeBase.location.latitude"
                         id="lat"
+                        class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                    />
+                </div>
+                <div
+                    class="col-12 mt-2 font-bold"
+                >
+                    Assistant buying
+                </div>
+                <div v-if="site.assistantBuying" class="field col-5">
+                    <label for="assistantbuying-storefronturl">Storefront url</label>
+                    <InputText
+                        v-model="site.assistantBuying.storefrontUrl"
+                        id="assistantbuying-storefronturl"
                         class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
                     />
                 </div>
